@@ -14,5 +14,8 @@ No one should face what I faced.
 ---
 **UPD#2**
 * It's better & quicker now.
-* Will implement other algorithms and write some sims during summer
+* Will implement other algorithms and write some more sims during summer
 * An absurdle bot as well?!
+---
+
+PS : The .pkl file is too large to be uploaded !
