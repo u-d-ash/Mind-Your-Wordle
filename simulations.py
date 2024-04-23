@@ -55,6 +55,9 @@ for word_ind in tqdm(init_sol_space):
 print(f"Success Rate : {round(succ_moves/len(init_sol_space) * 100 , 2)}")
 print(f"Avg moves taken in successful games : {round(total_moves/succ_moves, 3)}")
 
+## Success Rate : 99.09 %
+## Avg Moves in Successful Games : 3.66
+
 
 
 
