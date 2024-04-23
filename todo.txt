@@ -1,0 +1,4 @@
+* different algorithms !!
+* sims
+* gui
+* absurdle bot??
