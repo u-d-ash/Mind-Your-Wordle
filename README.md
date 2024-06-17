@@ -11,6 +11,10 @@ No one should face what I faced.
 
 **Pro tip** : Start with "SALET"
 
+Made by :
+* [Udit Jethva](https://github.com/u-d-ash)
+* [Tanush Reddy K](https://github.com/flyingheights)
+
 ---
 **UPD#2**
 * It's better & quicker now.
@@ -19,3 +23,5 @@ No one should face what I faced.
 ---
 
 PS : The .pkl file is too large to be uploaded !
+
+
