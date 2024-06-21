@@ -8,14 +8,3 @@
 No one should face what I faced.
 
 **Wordle Bot** : Enter the word you played and the response received *(Grey : 3, Yellow : 2, White : 1)* and then watch the magic unfold.
-
-**Pro tip** : Start with "SALET"
-
----
-**UPD#2**
-* It's better & quicker now.
-* Will implement other algorithms and write some more sims during summer
-* An absurdle bot as well?!
----
-
-PS : The .pkl file is too large to be uploaded !

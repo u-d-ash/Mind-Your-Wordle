@@ -10,8 +10,8 @@ def assign_filter_space(i, j):
 
     greens = comp_resp[0]
     posgreys = comp_resp[1]
-    yells = comp_resp[2]
-    greys = comp_resp[3]
+    greys = comp_resp[2]
+    count_conts = comp_resp[3]
 
     space = set(init_guess_space)
     
@@ -32,32 +32,18 @@ def assign_filter_space(i, j):
         ind = g[1]
 
         space = space.intersection(set(posgrey_dict[let][chr(ind + 48)]))
-
-
-    newspace = []
-
-    for word_ind in space:
     
-        match = True
-        word_letter_counts = {letter: ind_to_word[word_ind].count(letter) for letter in set(ind_to_word[word_ind])}
-        guess_letter_counts = {letter: "".join(yells).count(letter) for letter in set(yells)}
-        
-        for k in guess_letter_counts.keys():
+    for cc in count_conts:
 
-            if(k not in word_letter_counts.keys()):
-                match = False
-                break
-            else:
-                if(guess_letter_counts[k] > word_letter_counts[k]):
-                    match = False
-                    break
+        let = cc[0]
+        counter = cc[1]
 
-        
-        if(match):
-            gwcol_matrix[i][j].append(word_ind)
-            #newspace.append(ind_to_word[word_ind])
-        
-    #return newspace
+        space = space.intersection(set(counter_dict[let][chr(counter + 48)]))
+
+
+    for aword in space:
+        gwcol_matrix[i][j].append(aword)
+
 
 def get_color_response(word_ind, seq_ind):
 
@@ -87,14 +73,30 @@ def get_color_response(word_ind, seq_ind):
             posgreys.append((word[i], i))
             yells.append(word[i])
 
+    count_conds = []
 
     for g in greys:
 
         if(g not in g_lets and g not in yells):
 
             final_greys.append(g)
+        
+        elif(g in g_lets or g in yells):
+
+            totka = 0
+
+            for x in g_lets:
+
+                totka += (x == g)
+            
+            for x in yells:
+
+                totka += (x == g)
+            
+            count_conds.append([g, totka])
+
     
-    return (set(greens), set(posgreys), yells, set(final_greys))
+    return (set(greens), set(posgreys), set(final_greys), count_conds)
 
 for i in tqdm(range(len(init_guess_space))):
 

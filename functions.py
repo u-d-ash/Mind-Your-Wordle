@@ -1,31 +1,50 @@
-
 from glob_vars import *
-from tqdm import tqdm
-import math
 
 def get_filter_space(space, gw_ind, cc_ind):
 
     return set(gw_col_matrix[gw_ind][cc_ind]).intersection(space)
 
-def get_optimal_moves(g_space, s_space):
+def max_min_algo(g_space, s_space):
 
     moves = []
 
     for gw_ind in g_space:
 
-        min_info = 15
+        maxlen = -1
 
         for cr_ind in all_color_combs:
 
             ci_len = len(get_filter_space(s_space, gw_ind, cr_ind))
 
             if(ci_len != 0):
-                min_info = min(min_info, -1 * math.log2(ci_len/len(s_space)))
+                maxlen = max(maxlen, ci_len)
         
         
-        moves.append((min_info, (int(gw_ind in s_space), ind_to_word[gw_ind])))
+        moves.append((maxlen, (- 1 * int(gw_ind in s_space), ind_to_word[gw_ind])))
     
-    moves.sort(reverse=True)
+    moves.sort(reverse=False)
+
+    return moves
+
+def avg_split_algo(g_space, s_space):
+
+    moves = []
+
+    for gw_ind in g_space:
+
+        exp_val = 0
+
+        for cr_ind in all_color_combs:
+
+            ci_len = len(get_filter_space(s_space, gw_ind, cr_ind))
+
+            if(ci_len != 0):
+
+                exp_val += ((ci_len ** 2)/len(s_space))
+        
+        moves.append((exp_val, (-1 * int(gw_ind in s_space), ind_to_word[gw_ind])))
+    
+    moves.sort(reverse = False)
 
     return moves
 
@@ -70,8 +89,6 @@ def get_color_comb(guess, ans):
         
     
     return "".join(code)
-    
-    
 
 
 

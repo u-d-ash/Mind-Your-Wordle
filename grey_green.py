@@ -7,6 +7,7 @@ from glob_vars import *
 green_dict = {}
 posgrey_dict = {}
 grey_dict = {}
+counter_dict = {}
 
 for i in tqdm(range(26)):
 
@@ -40,7 +41,36 @@ for i in tqdm(range(26)):
             
         green_dict[let][j] = gfil
 
-        posgrey_dict[let][j] = list(set(init_guess_space).difference(set(gfil)))
+for i in tqdm(range(26)):
+        
+    let = chr(i + 97)
+
+    posgrey_dict[let] = {}
+
+    hasword = set()
+
+    for k in range(5):
+        hasword = hasword.union(green_dict[let][k])
+    
+    for j in range(5):
+
+        posgrey_dict[let][j] = list(hasword.difference(set(green_dict[let][j])))
+
+for gw in tqdm(init_guess_space):
+
+    word = ind_to_word[gw] 
+
+    for let in set(word):
+
+        if(let in counter_dict.keys()):
+
+            if(word.count(let) in counter_dict[let].keys()):
+                counter_dict[let][word.count(let)].append(gw)
+            else:
+                counter_dict[let][word.count(let)] = [gw]
+        else:
+            counter_dict[let] = {}
+            counter_dict[let][word.count(let)] = [gw]
 
 with open("precomps/greens.json", "w") as f:
 
@@ -53,6 +83,10 @@ with open("precomps/greys.json", "w") as f:
 with open("precomps/posgrey.json", "w") as f:
 
     json.dump(posgrey_dict, f)
+
+with open("precomps/counter.json", "w") as f:
+
+    json.dump(counter_dict, f)
 
 
 

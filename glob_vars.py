@@ -31,6 +31,7 @@ init_guess_space = [word_to_ind[word] for word in init_guess_space]
 init_sol_space = [word_to_ind[word] for word in init_sol_space]
 all_color_combs = [ccomb_to_ind[cc] for cc in all_color_combs]
 
+
 with open("precomps/greens.json") as f:
     green_dict = json.load(f)
 
@@ -39,6 +40,9 @@ with open("precomps/greys.json") as f:
 
 with open("precomps/posgrey.json") as f:
     posgrey_dict = json.load(f)
+
+with open("precomps/counter.json") as f:
+    counter_dict = json.load(f)
 
 with open("precomps/gw_col_matrix.pkl", "rb") as f:
 

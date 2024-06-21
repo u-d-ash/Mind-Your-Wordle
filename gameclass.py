@@ -3,9 +3,10 @@ from functions import *
 
 class game:
 
-    def __init__(self, answer, hardmode = 0):
+    def __init__(self, answer, hardmode = 0, algo = 0):
         self.solution = answer
         self.hardmode = hardmode
+        self.algo = algo
         self.gspace = set(init_guess_space)
         self.sspace = set(init_sol_space)
         self.played_moves = []
@@ -25,45 +26,39 @@ class game:
 
     def simulate(self, start_word):
         
-        # for min-max algo:
         resp = self.play(start_word)
         moves = 1
 
         if(resp == "11111"):
             return moves
 
-        for i in range(5):
-            opt_moves = get_optimal_moves(self.gspace, self.sspace)
+        while(True):
+
+            if(self.algo == 0):
+                opt_moves = max_min_algo(self.gspace, self.sspace)
+            elif(self.algo == 1):
+                opt_moves = avg_split_algo(self.gspace, self.sspace)
+
             best_move = opt_moves[0][1][1]
             j = 1
             while(j < len(opt_moves) and best_move in self.played_moves):
                 best_move = opt_moves[j][1][1]
                 j += 1
+
+            if(len(self.sspace) == 1):
+                best_move = ind_to_word[(list)(self.sspace)[0]]
+
             resp = self.play(best_move)
             moves += 1
+            
             if(resp == "11111"):
                 return moves
+
+            if(moves > 6):
+                return moves
         
-        return 7
 
-## Hard Mode Min Max Algorithm Sim:
 
-succ_moves = 0
-total_moves = 0
-
-for word_ind in tqdm(init_sol_space):
-
-    the_game = game(ind_to_word[word_ind], 1)
-    moves = the_game.simulate("salet")
-    if(moves <= 6):
-        succ_moves += 1
-        total_moves += moves
-
-print(f"Success Rate : {round(succ_moves/len(init_sol_space) * 100 , 2)}")
-print(f"Avg moves taken in successful games : {round(total_moves/succ_moves, 3)}")
-
-## Success Rate : 99.39 %
-## Avg Moves in Successful Games : 3.664
 
 
 
