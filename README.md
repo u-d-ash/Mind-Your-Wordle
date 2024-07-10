@@ -13,3 +13,4 @@ Made by :
 * [Udit Jethva](https://github.com/u-d-ash)
 * [Tanush Reddy K](https://github.com/flyingheights)
 
+I also wrote a blog post on this thing : [raise > adieu > pzazz](https://u-d-ash.github.io/Bloggo/blogposts/wordle_bot/)
